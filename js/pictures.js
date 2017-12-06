@@ -40,8 +40,8 @@ var renderAllPictures = function () {
 renderAllPictures();
 
 var renderFirstPicture = function () {
-GalleryOverlayPreview.querySelector('.gallery-overlay-image ').src = pictures[1].url;
-GalleryOverlayPreview.querySelector('.likes-count').textContent = pictures[1].likes;
-GalleryOverlayPreview.querySelector('.comments-count').textContent = pictures[1].comments;
+  GalleryOverlayPreview.querySelector('.gallery-overlay-image ').src = pictures[1].url;
+  GalleryOverlayPreview.querySelector('.likes-count').textContent = pictures[1].likes;
+  GalleryOverlayPreview.querySelector('.comments-count').textContent = pictures[1].comments;
 };
 renderFirstPicture();
