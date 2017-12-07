@@ -13,19 +13,17 @@ var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-
-
 var generatePictures = function () {
-var pictures = [];
+  var pictures = [];
   for (var i = 1; i <= PHOTOS_COUNT; i++) {
     pictures[i] =
     {
-     url: 'photos/' + i + '.jpg',
-     likes: getRandomNumber(minLikes, maxLikes),
-     comments: getRandomNumber(minComments, PHOTOS_COMMENTS.length)
+      url: 'photos/' + i + '.jpg',
+      likes: getRandomNumber(minLikes, maxLikes),
+      comments: getRandomNumber(minComments, PHOTOS_COMMENTS.length)
     };
   }
-    return pictures;
+  return pictures;
 };
 var pictures = generatePictures();
 
