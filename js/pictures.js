@@ -17,7 +17,7 @@ var getRandomNumber = function (min, max) {
 var generatePictures = function () {
   var pictures = [];
   for (var i = 0; i <= PHOTOS_COUNT; i++) {
-    var number= i + 1;
+    var number = i + 1;
     pictures[i] =
     {
       url: 'photos/' + number + '.jpg',
@@ -94,7 +94,7 @@ galleryClose.addEventListener('keydown', function (evt) {
 var photosElement = document.querySelectorAll('.picture');
 
 photosElement.forEach(function (item, index) {
-    var onItemClick = function (evt) {
+  var onItemClick = function (evt) {
     evt.preventDefault();
     openPopup();
     renderFirstPicture(pictures[index]);
