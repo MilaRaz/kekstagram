@@ -9,21 +9,24 @@ var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
 var pictureTemplate = document.querySelector('#picture-template').content;
 var galleryOverlayPreview = document.querySelector('.gallery-overlay-preview');
-var picturesClass = document.querySelector('.pictures');
+var pictures_c = document.querySelector('.pictures');
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
 var generatePictures = function () {
   var pictures = [];
+    
   for (var i = 0; i <= PHOTOS_COUNT; i++) {
-    var number = i + 1;
+      
+     var number= i + 1;
     pictures[i] =
     {
-      url: 'photos/' + number + '.jpg',
+      url: 'photos/' + number+ '.jpg',
       likes: getRandomNumber(MIN_LIKES, MAX_LIKES),
       comments: getRandomNumber(MIN_COMMENTS, PHOTOS_COMMENTS.length)
     };
+  
   }
   return pictures;
 };
@@ -42,7 +45,7 @@ var renderAllPictures = function () {
   for (var i = 0; i < PHOTOS_COUNT; i++) {
     fragment.appendChild(renderPicture(pictures[i]));
   }
-  picturesClass.appendChild(fragment);
+  pictures_c.appendChild(fragment);
 };
 renderAllPictures();
 
@@ -54,20 +57,23 @@ var renderFirstPicture = function (photo) {
 
 
 var picture = document.querySelector('.picture');
+var galleryOpen = document.querySelector('.gallery-overlay');
 var galleryClose = document.querySelector('.gallery-overlay-close');
 
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closePopup();
   }
+    
 };
 var openPopup = function () {
   document.addEventListener('keydown', onPopupEscPress);
-  document.querySelector('.gallery-overlay').classList.remove('hidden');
+    document.querySelector('.gallery-overlay').classList.remove('hidden');
 };
 var closePopup = function () {
-  document.removeEventListener('keydown', onPopupEscPress);
-  document.querySelector('.gallery-overlay').classList.add('hidden');
+    document.removeEventListener('keydown', onPopupEscPress);
+document.querySelector('.gallery-overlay').classList.add('hidden');
+    
 };
 
 picture.addEventListener('click', function () {
@@ -93,14 +99,120 @@ galleryClose.addEventListener('keydown', function (evt) {
 
 var photosElement = document.querySelectorAll('.picture');
 
+
+ 
 photosElement.forEach(function (item, index) {
+    
+    
   var onItemClick = function (evt) {
-    evt.preventDefault();
-    openPopup();
+      evt.preventDefault();
+      openPopup();
     renderFirstPicture(pictures[index]);
   };
 
-  item.addEventListener('click', onItemClick);
+item.addEventListener('click', onItemClick);
 
 });
 
+var uploadFile = document.querySelector('#upload-file');
+var uploadSelectImage = document.querySelector('#upload-select-image').content;
+var uploadFormCancel = document.querySelector('.upload-form-cancel');
+//var uploadOverlay = document.querySelector('.upload-overlay').classList.remove('hidden');
+var uploadFormDescription = document.querySelector('.upload-form-description');
+var uploadFormSubmit = document.querySelector('.upload-form-submit');
+
+
+var openOverlay = function() {
+  document.querySelector('.upload-overlay').classList.remove('hidden');
+    
+  document.addEventListener('keydown', function(evt) {
+      if (uploadFormDescription !== document.activeElement) {
+    if (evt.keyCode === 27) {
+   closeOverlay();
+    }
+      }
+ });      
+    
+};
+
+var closeOverlay = function() {
+  document.querySelector('.upload-overlay').classList.add('hidden');
+};
+
+uploadFile.addEventListener('click', function() {
+  openOverlay();
+ 
+});
+
+uploadFormCancel.addEventListener('click', function() {
+  closeOverlay();
+});
+
+uploadFormCancel.addEventListener('keydown', function(evt) {
+  if (evt.keyCode === 13) {
+   closeOverlay();
+  }
+});
+
+
+uploadFormSubmit.addEventListener('click', function () {
+  closeOverlay();
+});
+
+uploadFormSubmit.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closeOverlay();
+  }
+})
+
+//document.querySelector('.upload-effect-label-chrome').onclick = function() {
+    //var target = evt.currentTarget;
+    //if (target.className = 'upload-effect-label-chrome'){
+        //document.querySelector('.effect-image-preview').classList.add('effect-chrome');}
+    
+   // target.className
+   // consol.log(event.target.classList[3]);
+    //upload-effect-label-chrome
+//document.querySelector('.effect-image-preview').classList.add('effect-chrome');
+    
+//};
+
+//document.querySelector('.upload-effect-label-sepia').addEventListener('click', function () {
+//document.querySelector('.effect-image-preview').classList.add('effect-sepia');
+//});
+
+
+//document.getElementById('.upload-effect-chrome').onclick = function(event) {
+  //var target = event.target; // where was the click?
+
+
+  //uploadEffect(target); // highlight it
+//};
+
+//function uploadEffect(target) {
+  //if (target) { // remove the existing highlight if any
+    //document.querySelector('.effect-image-preview').classList.remove('effect-chrome');
+  //}
+  //document.querySelector('.effect-image-preview').classList.add('effect-chrome'); // highlight the new td
+//}
+
+
+
+//var EffectImagePreview = document.querySelector('effect-image-preview');
+//var button = document.querySelector('upload-effect-label-chrome');
+//var clickedElement = null;
+
+var clickHandler = function(evt) {
+//var clickedElement = null;
+  
+  //if (EffectImagePreview) {
+    //EffectImagePreview.classList.remove('effect-chrome')
+ // }
+  
+  document.querySelector('effect-image-preview') = evt.currentTarget;
+
+  document.querySelector('effect-image-preview').classList.add('effect-chrome');
+  
+}
+
+document.querySelector('.upload-effect-chrome').addEventListener('click', clickHandler);
